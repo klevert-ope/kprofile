@@ -26,7 +26,8 @@ export default function Home() {
                         application development experience, specializing in high-performance services and resilient
                         systems engineering across backend, frontend, and cutting-edge blockchain systems. My background
                         is rooted in delivering robust solutions, from architecture to deployment, across diverse
-                        technologies like Java (Spring Boot), Node.js, Javascript, React + Vite, and various databases.
+                        technologies like Java (Spring Boot), Rust, Golang, Node.js, Javascript, React + Vite, and
+                        various databases.
                     </p>
                     <p>
                         Currently, I lead full-stack development and systems investigations at a UAE digital-assets
