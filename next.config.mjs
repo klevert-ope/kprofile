@@ -4,6 +4,9 @@ const nextConfig = {
 	productionBrowserSourceMaps: false,
 	reactProductionProfiling: true,
 	compress: true,
+	turbopack: {
+		root: process.cwd(),
+	},
 };
 
 export default nextConfig;
