@@ -9,6 +9,15 @@ export default {
   theme: {
 	  extend: {
 		  colors: {
+			  tty: {
+				  DEFAULT: "#b7d7bf",
+				  dim: "#6a7f72",
+				  cyan: "#7ee0d0",
+				  err: "#d96b6b",
+				  deny: "#e0a45a",
+				  daemon: "#8fd0c4",
+				  line: "#1c2621",
+			  },
 			  background: 'hsl(var(--background))',
 			  foreground: 'hsl(var(--foreground))',
 			  card: {
