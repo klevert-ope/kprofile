@@ -13,7 +13,7 @@ const BOOT_LINES = [
   "klevertopee.app 6.12.94+",
   "init: dubai-node @ 25.2048N 55.2708E",
   "identity: klevert opee",
-  "role: sr. systems engineer // fintech, distributed, agentic ops",
+  "role: sr. systems engineer // fdse, fintech, distributed, agentic ops",
   "type 'help' for primitives.",
 ];
 

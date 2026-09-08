@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { complete, interpret, OUTPUT } from "./cli.js";
+import { complete, FIELD_COPY, interpret, OUTPUT } from "./cli.js";
 
 describe("interpret", () => {
   it("noops on empty input", () => {
@@ -39,6 +39,21 @@ describe("interpret", () => {
       tone: "daemon",
       text: OUTPUT.hermes,
     });
+    assert.deepEqual(interpret("fdse"), {
+      type: "print",
+      tone: "daemon",
+      text: OUTPUT.fdse,
+    });
+    assert.deepEqual(interpret("deployments"), {
+      type: "print",
+      tone: "ok",
+      text: OUTPUT.deployments,
+    });
+    assert.deepEqual(interpret("field_stack"), {
+      type: "print",
+      tone: "ok",
+      text: OUTPUT.field_stack,
+    });
   });
 
   it("clears on clear", () => {
@@ -68,6 +83,12 @@ describe("interpret", () => {
     assert.equal(interpret("what is your stack?").text, OUTPUT.stack);
     assert.equal(interpret("how do I contact you").text, OUTPUT.contact);
     assert.equal(interpret("tell me about hermes").tone, "daemon");
+    assert.equal(interpret("client experience").text, FIELD_COPY);
+    assert.equal(interpret("what is forward deployed engineering?").text, FIELD_COPY);
+    assert.equal(interpret("field work").text, FIELD_COPY);
+    assert.equal(interpret("what is your field_stack").text, OUTPUT.field_stack);
+    assert.equal(interpret("describe your deployments").text, OUTPUT.deployments);
+    assert.equal(interpret("how do I contact you").text.includes("info@klevertopee.app"), true);
   });
 
   it("does not treat bare tokens as free-form", () => {
@@ -79,5 +100,7 @@ describe("complete", () => {
   it("prefixes primitives", () => {
     assert.deepEqual(complete("he"), ["help", "hermes"]);
     assert.deepEqual(complete("c"), ["contact", "clear"]);
+    assert.deepEqual(complete("f"), ["fdse", "field_stack"]);
+    assert.deepEqual(complete("de"), ["deployments"]);
   });
 });
