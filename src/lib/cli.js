@@ -5,6 +5,9 @@ export const PRIMITIVES = [
   "logs",
   "contact",
   "hermes",
+  "fdse",
+  "deployments",
+  "field_stack",
   "sudo",
   "clear",
 ];
@@ -12,21 +15,46 @@ export const PRIMITIVES = [
 export const PROMPT_USER = "klevert";
 export const PROMPT_HOST = "dubai";
 
+const DAEMON_COMMANDS = new Set(["hermes", "fdse"]);
+
 export const OUTPUT = {
-  help: "available primitives: [about] [stack] [logs] [contact] [hermes] [sudo] [clear]",
+  help: "available primitives: [about] [stack] [logs] [contact] [hermes] [fdse] [deployments] [field_stack] [sudo] [clear]",
   about:
     "KLEVERT OPEE // Systems Engineer. High-availability trading engines, multi-tenant APIs, and agentic orchestration.",
   stack:
     "runtimes: rust, go, java, python | data: postgres, redis, kafka | agentic: hermes framework",
   logs: "[2025-2026] processed $2B+ USD cumulative settlement volume. 0 unhandled panics.",
   contact:
-    "signal: klevertope@gmail.com | gh: github.com/klevert-ope | in: linkedin.com/in/klevert-opee",
+    "signal: info@klevertopee.app | gh: github.com/klevert-ope | in: linkedin.com/in/klevert-opee",
   hermes:
     "[hermes_daemon]: routing event -> scoring AML risks -> execution latency <12ms -> state: VALIDATED",
+  fdse: "[FDSE_INIT]: architecture scoping -> client-side deployment -> custom API integration -> rapid field execution.",
+  deployments:
+    "01: Integrated real-time monitoring and compliance layers directly into production asset pipelines.\n02: Built custom integration bridges & execution proxies (MT5, microVMs, eBPF).\n03: Implemented high-assurance client isolation models across multi-tenant infrastructures.",
+  field_stack:
+    "deploy: docker, kubernetes, ebpf, microvms | integration: gRPC, ZeroMQ, OpenAPI, Web3 | languages: rust, python, go, java",
   sudo: "Permission denied: user is not in the sudoers file. This incident will be reported.",
 };
 
+export const FIELD_COPY =
+  "[fdse]: ingest client architecture -> ship in-prod under compliance/security constraints -> custom integrations (kyt, risk gateways, multi-tenant apis) -> own e2e delivery.";
+
 const FREEFORM_RULES = [
+  {
+    test: /\b(fdse|forward[-\s]?deployed|field[-\s]?work|field[-\s]?engineer|client[-\s]?experience|client[-\s]?facing|on[-\s]?prem)\b/i,
+    text: FIELD_COPY,
+    tone: "daemon",
+  },
+  {
+    test: /\b(field[_\s-]?stack|ebpf|microvm|grpc|zeromq|nomad|openapi)\b/i,
+    text: OUTPUT.field_stack,
+    tone: "ok",
+  },
+  {
+    test: /\b(deployment|deployments|isolation|mt5|proxy bridge|multi[-\s]?tenant)\b/i,
+    text: OUTPUT.deployments,
+    tone: "ok",
+  },
   {
     test: /\b(hermes|agentic|orchestrat|aml)\b/i,
     text: OUTPUT.hermes,
@@ -71,7 +99,10 @@ function isFreeform(input) {
   if (input.includes("?")) {
     return true;
   }
-  return /\b(who|what|where|when|why|how|tell|describe|explain|your|you|about)\b/i.test(
+  if (/\s/.test(input)) {
+    return true;
+  }
+  return /\b(who|what|where|when|why|how|tell|describe|explain|your|you|about|fdse|deployments|field)\b/i.test(
     input,
   );
 }
@@ -110,7 +141,7 @@ export function interpret(raw) {
   }
 
   if (Object.hasOwn(OUTPUT, lowered) && !lowered.includes(" ")) {
-    const tone = lowered === "hermes" ? "daemon" : "ok";
+    const tone = DAEMON_COMMANDS.has(lowered) ? "daemon" : "ok";
     return { type: "print", tone, text: OUTPUT[lowered] };
   }
 
