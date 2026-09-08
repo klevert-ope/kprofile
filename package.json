@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --experimental-default-type=module --test src/lib/cli.test.js"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.2",
