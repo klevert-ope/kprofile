@@ -1,12 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: "standalone",
-	productionBrowserSourceMaps: false,
-	reactProductionProfiling: true,
-	compress: true,
-	turbopack: {
-		root: process.cwd(),
-	},
+  output: "standalone",
+  poweredByHeader: false,
+  agentRules: false,
+  allowedDevOrigins: (process.env.NEXT_DEV_ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;

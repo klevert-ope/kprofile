@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:23-alpine3.20 AS base
+FROM node:24-alpine AS base
 
 LABEL maintainer="Klevert Opee"
 LABEL description="Portfolio"

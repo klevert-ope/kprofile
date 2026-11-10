@@ -1,4 +1,8 @@
 node_modules
+.git
+.next
+output/playwright
+*.stackdump
 npm-debug.log
 Dockerfile
 docker-compose.yml
