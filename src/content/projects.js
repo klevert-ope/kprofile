@@ -22,15 +22,18 @@ export const projects = [
     name: "ASE7EN",
     category: "Financial infrastructure",
     status: "Pre-production",
-    summary: "Programmable stablecoin payments with verifiable settlement.",
-    stack: ["Go", "Smart contracts", "Base / Solana / TRON"],
-    problem: "Integrators need to know when an approved payment has settled.",
+    summary:
+      "A non-custodial programmable payments project for stablecoins, built around payment accounts and hosted checkout.",
+    stack: ["TypeScript", "Go", "Solidity", "Rust", "React", "PostgreSQL"],
+    problem:
+      "Applications need a clear way to create payment requests and establish when funds have settled.",
     architecture:
-      "Hosted checkout sits above on-chain payment accounts on Base, Solana and TRON.",
-    decision: "Track approval, execution and verified settlement separately.",
+      "Hosted checkout and rail-specific clients connect to payment account and escrow implementations for Base/USDC, Solana/USDC and TRON/USDT. A Go indexer builds PostgreSQL projections from chain data.",
+    decision:
+      "Keep customer approval and native settlement evidence separate from API state, webhooks and application coordination.",
     outcome:
-      "Core flows tested locally. Mainnet release and independent audit are pending.",
-    links: [{ label: "Project site", href: "https://ase7en.com" }],
+      "Private repository and pre-production implementation. Deployment, independent audit and release qualification remain pending.",
+    links: [],
   },
   {
     slug: "use-hls-video-player",
@@ -38,15 +41,17 @@ export const projects = [
     name: "UseHLSVideoPlayer",
     category: "Media infrastructure",
     status: "Open source",
-    summary: "Headless HLS playback for React.",
-    stack: ["TypeScript", "React", "hls.js"],
+    summary:
+      "A headless HLS playback library for React applications and framework-independent TypeScript projects.",
+    stack: ["TypeScript", "React", "hls.js", "HTML video"],
     problem:
-      "Native HLS and hls.js expose different playback controls and state.",
+      "Native HLS and hls.js expose different playback controls and state across browsers.",
     architecture:
-      "A TypeScript controller connects the video element to either engine.",
-    decision: "React hooks expose playback state while apps own the player UI.",
+      "A TypeScript controller attaches a stream to an HTML video element using native HLS or hls.js. React hooks expose the controller to components.",
+    decision:
+      "Keep playback logic separate from presentation so applications can use browser controls or build their own player UI.",
     outcome:
-      "The public API exposes quality, tracks, live state and playback metrics.",
+      "The library exposes playback state, quality and track selection, live playback controls, errors and metrics.",
     links: [
       {
         label: "Source",
@@ -61,15 +66,17 @@ export const projects = [
     name: "Desktop Runtime",
     category: "Systems engineering",
     status: "Open-source prototype",
-    summary: "A Rust desktop host with an embedded React interface.",
-    stack: ["Rust", "tao", "wry", "React"],
+    summary:
+      "A native desktop runtime that packages a React interface inside a Rust application.",
+    stack: ["Rust", "tao", "wry", "React", "Vite"],
     problem:
-      "Ship a web interface as a desktop app with a small runtime footprint.",
+      "Run a web-based interface as a desktop application without bundling a browser engine or Node at runtime.",
     architecture:
-      "tao manages the window, wry hosts the OS WebView, and Vite builds the bundled UI.",
+      "tao manages windows and events, wry hosts the operating system WebView, and Vite builds React assets embedded in the Rust binary. Typed IPC connects the interface to native commands.",
     decision:
-      "Use the platform WebView and keep host capabilities behind typed IPC.",
-    outcome: "The public prototype includes the host, UI and packaging setup.",
+      "Use the platform WebView and keep native capabilities behind explicit commands.",
+    outcome:
+      "The open-source project includes the host, interface and packaging for Windows, macOS and Linux.",
     links: [
       {
         label: "Source",

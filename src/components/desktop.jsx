@@ -479,18 +479,20 @@ function Explorer({ type }) {
                 <p>{project.stack.join(" · ")}</p>
                 <h3>Current status</h3>
                 <p>{project.outcome}</p>
-                <div className="project-links">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {link.label} ↗
-                    </a>
-                  ))}
-                </div>
+                {project.links.length > 0 && (
+                  <div className="project-links">
+                    {project.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {link.label} ↗
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <>
@@ -541,7 +543,8 @@ function Explorer({ type }) {
               </div>
               <div className="group-heading">Technologies</div>
               <p className="technology-list">
-                Go · TypeScript · React · Rust · Smart contracts
+                Java · Spring Boot · Python · Django · FastAPI · Go · Rust ·
+                TypeScript · React · PostgreSQL · Docker · Linux
               </p>
             </>
           )}
@@ -558,7 +561,7 @@ function Explorer({ type }) {
   );
 }
 
-const INTRO = `Klevert Opee\n\nSenior Software Engineer\n\nI design and build reliable software systems, with a focus on distributed computing, fintech, and infrastructure.\n\nI have more than five years of experience building software for digital-asset trading, settlement, and internal operations.\n\nI enjoy working across the stack, from event-driven services and APIs to deployment, observability, and security. I value clear system boundaries and software that is practical to operate.`;
+const INTRO = `Klevert Opee\n\nSenior Software Engineer\n\nI build and operate financial software, with more than five years of experience across settlement, accounting, reconciliation and digital-asset trading.\n\nMy work spans Java and Spring Boot, Python, Go and Rust, from APIs and data services to Linux infrastructure. I enjoy making complex systems easier to understand, maintain and operate.`;
 function Notepad({ experience = false }) {
   return (
     <div className="notepad">
@@ -566,19 +569,40 @@ function Notepad({ experience = false }) {
         {experience ? (
           <>
             <h2>Experience</h2>
-            <p>Software engineering</p>
             <p>
-              5+ years building software for digital-asset trading, settlement,
-              and internal operations.
+              <strong>Senior Full Stack Software Engineer</strong>
+              <br />
+              Mudhafar Almansoori Digital Assets Trading DMCC · 2025–Present
             </p>
             <p>
-              Areas of responsibility include financial systems, event-driven
-              services, APIs, data pipelines, deployments, observability, and
-              security.
+              Build settlement, accounting and reconciliation services with
+              Spring Boot, GraphQL, Django and FastAPI. Work also includes
+              transaction monitoring, market data and production Linux
+              infrastructure.
             </p>
             <p>
-              My work focuses on reliable systems and clear boundaries between
-              approval, execution, and settlement.
+              <strong>Full Stack Software Developer</strong>
+              <br />
+              Uwezo Endelevu Consultancy · 2023–2024
+            </p>
+            <p>
+              Built Java and Python APIs, PostgreSQL models and React
+              dashboards. Automated reports and improved deployment workflows.
+            </p>
+            <p>
+              <strong>Junior Full Stack Developer</strong>
+              <br />
+              Uwezo Endelevu Consultancy · 2019–2023
+            </p>
+            <p>
+              Maintained Java EE and Oracle applications, developed REST
+              endpoints and reports, and supported Linux application servers.
+            </p>
+            <h2>Education</h2>
+            <p>
+              BSc Computer Science · Kabarak University
+              <br />
+              Certified Agile Scrum Master · 2025
             </p>
           </>
         ) : (
@@ -597,7 +621,7 @@ const commands = {
   help: "Available commands: help, whoami, skills, projects, contact, clear",
   whoami: "Klevert Opee — Senior Software Engineer.",
   skills:
-    "Distributed systems, financial infrastructure, Go, TypeScript, React, Rust and smart contracts.",
+    "Financial systems, Java, Spring Boot, Python, Django, FastAPI, Go, Rust, TypeScript, React, PostgreSQL, Docker and Linux.",
   projects: projects.map((p) => `${p.name} — ${p.summary}`).join("\n"),
   contact: `Email: ${site.email}\nGitHub: ${site.github}\nLinkedIn: ${site.linkedin}`,
 };
